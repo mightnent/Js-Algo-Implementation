@@ -1,2 +1,3 @@
-# mightnent-gmail.com
-Js Algo implementation
+#Js Algo implementation
+
+Will be slowly adding my implementations. 
