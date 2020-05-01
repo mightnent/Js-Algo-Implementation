@@ -45,53 +45,62 @@
 //will increase time
 function PriorityQueue(){
     //understand that a 1x2 tuple/list is passed in
-    var collection = {};
-
+    var collection = [];
+    
     this.printCollection = function(){
-        tempList = []
-        keyArr = Object.keys(collection);
-        kaSorted = keyArr.sort(function(a, b){return a-b});
-        for(i=0;i<kaSorted.length;i++){
-            for(j=0;j<collection[kaSorted[i]].length;j++){
-                tempList.push(collection[kaSorted[i]][j]);
-            }
-        }
-        return tempList
-    };
-
-    this.isEmpty = function(){
-        return (Object.keys(collection).length === 0);
-    };
-
-    this.size = function(){
-        return (this.printCollection().length);
+        console.log(collection);
     };
 
     this.enqueue = function(e){
-        if(this.isEmpty===true){
-            
-            return collection[e[0]] = [e[1]];
-          
-        } 
-        else if(e[0] in collection === false){
-          
-            return collection[e[0]] = [e[1]];
+        if(this.isEmpty()){
+            collection.push(e);
+        } else {
+            var added = false;
+            for(var i =0;i<collection.length;i++){
+                if (e[1] < collection[i][1]){
+                    //splice(pos,del,element)
+                    collection.splice(i,0,e);
+                    added = true;
+                    break;
+                }
+            }
+            if (!added){
+                //so if we run through the entire seq and havent insert, means the priority very low, 
+                //so we just insert it at the back
+                collection.push(e);
+            }
         }
-        else{
-            
-            return collection[e[0]].push(e[1])
-        }
-    };
+    }
 
+    this.dequeue = function(){
+        //dequeue only means to take the first one out
+        var value = collection.shift();
+        return value[0];
+    }
+
+    this.front = function(){
+        return collection[0];
+    }
+
+    this.size = function(){
+        return collection.length;
+    }
+
+    this.isEmpty = function(){
+        return (collection.length === 0);
+    }
     
 }
 
 var Q = new PriorityQueue;
 //console.log(Q.isEmpty());
 console.log(Q.isEmpty());
-console.log(Q.enqueue([1,"p"]));
+console.log(Q.enqueue(["p",200]));
 console.log(Q.isEmpty());
 console.log(Q.enqueue([3,"a"]));
 console.log(Q.enqueue([3,"d"]));
 console.log(Q.printCollection())
 console.log(Q.size())
+console.log(Q.dequeue());
+
+//as you can see, numeric comes before alphabet in terms of priority
