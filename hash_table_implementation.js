@@ -6,7 +6,7 @@ function hash(string,max){
     return hashcode%max
 }
 
-let hashTable = function(){
+let HashTable = function(){
     let storage = [];
     const storageLimit = 4;
 
