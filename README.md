@@ -1,3 +1,4 @@
 #Js Algo implementation
 
-Will be slowly adding my implementations. 
+with courtersy of FreeCodeCamps.org.
+
